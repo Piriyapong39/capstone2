@@ -1,8 +1,13 @@
 from flask import Flask, jsonify
 from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
+MONGODB_DATABASE = os.getenv("MONGO_URL")
 app = Flask(__name__)
-client = MongoClient("mongodb+srv://datafromgooglesheet:kaluiklui3011@cluster0.7vgowbh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client = MongoClient(MONGODB_DATABASE)
 db = client.weather
 
 @app.route("/", methods=["GET"])
